@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 
-const TaskDashborad = () => {
+const TaskList = () => {
   const [tasks, setTasks] = useState([]);
   const [textInput, setTextInput] = useState("");
   const [selectedPriority, setSelectedPriority] = useState("High");
@@ -135,4 +135,4 @@ const TaskDashborad = () => {
   );
 };
 
-export default TaskDashborad;
+export default TaskList;

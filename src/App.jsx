@@ -1,33 +1,45 @@
 import React, { useState } from "react";
 import "./App.css";
-import TaskDashborad from "./Context/TaskDashborad";
-import GreenScene from "./Context/GreenScreen";
-import BlueScene from "./Context/BlueScreen";
+import TaskList from "./Context/TaskList";
+import TaskBoard from "./Context/TaskBoard";
+import TaskCalendar from "./Context/TaskCalendar";
+import Menu from "./Context/Menu";
 
 function App() {
-  const [currentScene, setCurrentScene] = useState("taskDashboard");
+  const [currentScene, setCurrentScene] = useState("taskList");
 
-  const handleClick = () => {
-    switch (currentScene) {
-      case "taskDashboard":
-        setCurrentScene("blueScene");
-        break;
-      case "blueScene":
-        setCurrentScene("greenScene");
-        break;
-      case "greenScene":
-        setCurrentScene("taskDashboard");
-        break;
-      default:
-        setCurrentScene("taskDashboard");
-    }
+  const handleSceneChange = (scene) => {
+    setCurrentScene(scene);
   };
 
   return (
-    <div onClick={handleClick} style={{ height: "100vh", width: "100vw" }}>
-      {currentScene === "taskDashboard" && <TaskDashborad />}
-      {currentScene === "greenScene" && <GreenScene />}
-      {currentScene === "blueScene" && <BlueScene />}
+    <div>
+      {/* Top bar with app name and menu button */}
+      <div className="top-bar">
+        <span className="app-name">TasCal</span>
+        <button className="menu-button" onClick={() => handleSceneChange("menu")}>
+          ☰
+        </button>
+      </div>
+
+      {/* Second bar with selectable scenes */}
+      <div className="scene-bar">
+        <button className={currentScene === "calendar" ? "selected" : ""} onClick={() => handleSceneChange("calendar")}>
+          Calendar
+        </button>
+        <button className={currentScene === "board" ? "selected" : ""} onClick={() => handleSceneChange("board")}>
+          Board
+        </button>
+        <button className={currentScene === "list" ? "selected" : ""} onClick={() => handleSceneChange("list")}>
+          List
+        </button>
+      </div>
+
+      {/* Render the current scene based on the state */}
+      {currentScene === "calendar" && <TaskCalendar />}
+      {currentScene === "board" && <TaskBoard />}
+      {currentScene === "list" && <TaskList />}
+      {currentScene === "menu" && <Menu />}
     </div>
   );
 }

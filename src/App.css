@@ -1,5 +1,49 @@
+/* App.css */
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@700&family=Open+Sans:wght@800&family=Roboto:wght@700&display=swap');
+
+/* Top bar styles */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #333;
+  color: white;
+  padding: 1rem;
+}
+
+.app-name {
+  font-size: 1.5rem;
+}
+
+.menu-button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+/* Second bar styles */
+.scene-bar {
+  display: flex;
+  justify-content: space-around;
+  background-color: #555;
+  color: white;
+  padding: 0.5rem;
+}
+
+.scene-bar button {
+  background-color: transparent;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.scene-bar button.selected {
+  font-weight: bold;
+}
