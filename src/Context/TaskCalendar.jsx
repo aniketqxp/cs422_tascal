@@ -6,6 +6,9 @@ const TaskCalendar = () => {
   const [tasks, setTasks] = useState([]);
   const [textInput, setTextInput] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("To Do");
+  const [selectedPriority, setSelectedPriority] = useState("High");
   const [editTask, setEditTask] = useState(null);
 
   useEffect(() => {
@@ -23,19 +26,35 @@ const TaskCalendar = () => {
     setTextInput(event.target.value);
   };
 
+  const handleGroupChange = (event) => {
+    setSelectedGroup(event.target.value);
+  };
+
   const handleTimeChange = (event) => {
     setSelectedTime(event.target.value);
   };
+
+  const handleStatusChange = (event) => {
+    setSelectedStatus(event.target.value);
+  };
+
+  const handlePriorityChange = (event) => {
+    setSelectedPriority(event.target.value);
+  };
+
+  
 
   const handleTaskSubmit = () => {
     if (textInput.trim() === "" || selectedTime === "") {
       return;
     }
-
     const newTask = {
       id: tasks.length + 1,
       text: textInput,
+      group: selectedGroup,
       time: selectedTime,
+      status: selectedStatus,
+      priority: selectedPriority
     };
 
     setTasks([...tasks, newTask]);
