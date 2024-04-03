@@ -114,17 +114,6 @@ const TaskBoard = () => {
             placeholder="Enter task"
           />
         </div>
-        <div className="">
-          <select
-            value={selectedPriority}
-            onChange={handlePriorityChange}
-            className="w-full border rounded p-2"
-          >
-            <option value="High">High Priority</option>
-            <option value="Medium">Medium Priority</option>
-            <option value="Low">Low Priority</option>
-          </select>
-        </div>
         <button onClick={handleTaskSubmit} className="btn btn-secondary">
           Add Task
         </button>

@@ -114,7 +114,7 @@ const TaskCalendar = () => {
                 <div>{task.text}</div>
                 <div>{task.time}</div>
               </div>
-              <div className="task-actions">
+              <div className="task-cal-actions">
                 <button onClick={() => handleEditTask(task)}>Edit</button>
                 <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
               </div>

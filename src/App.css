@@ -47,3 +47,12 @@
 .scene-bar button.selected {
   font-weight: bold;
 }
+
+
+.task-box {
+  color: white;
+}
+
+.task-cal-actions {
+  color: white;
+}
