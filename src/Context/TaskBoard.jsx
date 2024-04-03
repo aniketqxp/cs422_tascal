@@ -123,6 +123,7 @@ const TaskBoard = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* To Do */}
           <StatusLayout
+            id="to-do"
             getTasksByStatus={getTasksByStatus}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}
@@ -134,6 +135,7 @@ const TaskBoard = () => {
           />
           {/* Doing */}
           <StatusLayout
+            id="doing"
             getTasksByStatus={getTasksByStatus}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}
@@ -145,6 +147,7 @@ const TaskBoard = () => {
           />
           {/* Done */}
           <StatusLayout
+            id="done"
             getTasksByStatus={getTasksByStatus}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}

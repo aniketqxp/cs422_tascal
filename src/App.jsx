@@ -16,10 +16,10 @@ function App() {
     <div>
       {/* Top bar with app name and menu button */}
       <div className="top-bar">
-        <span className="app-name">TasCal</span>
-        <button className="menu-button" onClick={() => handleSceneChange("menu")}>
+      <button className="menu-button" onClick={() => handleSceneChange("menu")}>
           ☰
         </button>
+        <span className="app-name">TasCal</span>
       </div>
 
       {/* Second bar with selectable scenes */}
