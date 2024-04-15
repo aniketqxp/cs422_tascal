@@ -15,6 +15,17 @@
   padding: 1rem; /* ... */
 }
 
+.btn {
+  background-color: #FF5B19;
+  border-color: #FF5B19;
+  margin: 10px;
+  color: white;
+}
+
+.selected {
+  text-decoration: underline;
+}
+
 .app-name {
   flex: 1;
   text-align: center;
@@ -39,6 +50,7 @@
 
 .scene-bar button.selected {
   font-weight: bold;
+
 }
 
 .task-box {
