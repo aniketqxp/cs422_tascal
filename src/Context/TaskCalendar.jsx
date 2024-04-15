@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import EditTask from "./EditTask";
+import StatusLayout from "./StatusLayout";
 
 const TaskCalendar = () => {
   const [tasks, setTasks] = useState([]);
@@ -42,8 +43,6 @@ const TaskCalendar = () => {
     setSelectedPriority(event.target.value);
   };
 
-  
-
   const handleTaskSubmit = () => {
     if (textInput.trim() === "" || selectedTime === "") {
       return;
@@ -74,11 +73,12 @@ const TaskCalendar = () => {
     onSwipedLeft: () => setEditTask(null),
   });
 
-  const sortedTasks = tasks.sort((a, b) => {
-    const timeA = new Date(a.time);
-    const timeB = new Date(b.time);
-    return timeA - timeB;
-  });
+  const sortedTasksByDate = tasks.reduce((acc, task) => {
+    const date = task.time.split("T")[0];
+    acc[date] = acc[date] || [];
+    acc[date].push(task);
+    return acc;
+  }, {});
 
   return (
     <div>
@@ -107,20 +107,21 @@ const TaskCalendar = () => {
         </div>
       </div>
       <div className="mt-8 space-y-4 text-black">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          {sortedTasks.map((task) => (
-            <div key={task.id} className="task-item" {...handlers}>
-              <div className="task-box">
-                <div>{task.text}</div>
-                <div>{task.time}</div>
-              </div>
-              <div className="task-cal-actions">
-                <button onClick={() => handleEditTask(task)}>Edit</button>
-                <button onClick={() => handleDeleteTask(task.id)}>Delete</button>
-              </div>
+        {Object.keys(sortedTasksByDate).map((date) => (
+          <div key={date}>
+            <h2>{date}</h2>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <StatusLayout
+                id={date}
+                getTasksByStatus={() => sortedTasksByDate[date]}
+                setSelectedTask={setEditTask}
+                selectedTask={editTask}
+                handleEditTask={handleEditTask}
+                handleDeleteTask={handleDeleteTask}
+              />
             </div>
-          ))}
-        </div>
+          </div>
+        ))}
       </div>
       {editTask && <EditTask task={editTask} />}
     </div>

@@ -1,0 +1,28 @@
+/* StatusLayout.css */
+
+.status-layout {
+  background-color: #ecebd7;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.status-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.task-item {
+  background-color: #111111;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  cursor: pointer;
+  color: #e3a242;
+}
+
+.task-item:hover {
+  background-color: #e3a242;
+  color: #111111
+}
