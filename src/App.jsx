@@ -7,6 +7,8 @@ import Menu from "./Context/Menu";
 
 function App() {
   const [currentScene, setCurrentScene] = useState("taskList");
+  
+   
 
   const handleSceneChange = (scene) => {
     setCurrentScene(scene);
