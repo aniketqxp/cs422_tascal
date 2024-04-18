@@ -12,6 +12,7 @@ function StatusLayout(props) {
           {props.selectedTask === task && (
             <Action
               status={props.status}
+              openModal={props.setOpenModal}
               handleEditTask={props.handleEditTask}
               handleChangePriority={props.handleChangePriority}
               handleChangeStatus={props.handleChangeStatus}

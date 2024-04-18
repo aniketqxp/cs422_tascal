@@ -60,3 +60,45 @@
 .task-cal-actions {
   color: #E5E3D2; /* Platinum */
 }
+
+.overlay {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+.modalContainer {
+  background-color: rgb(33, 33, 33);
+  max-width: 600px;
+  width: 100%;
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: white; */
+  display: flex;
+  flex-direction: column;
+
+}
+
+.closeButton {
+  position: fixed;
+  top: 8px;
+  right: 8px;
+}
+
+.modalTitle {
+  text-align: center;
+  font-size: 40px;
+}
+
+.inputField {
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+}
+
+input[type="text"] {
+  width: 100%;
+}

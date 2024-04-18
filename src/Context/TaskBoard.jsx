@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import StatusLayout from "./StatusLayout";
+import Modal from "./Modal";
 
-const TaskBoard = () => {
+const TaskBoard = (props) => {
     const [tasks, setTasks] = useState([]);
     const [textInput, setTextInput] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
@@ -106,15 +107,15 @@ const TaskBoard = () => {
     <div className="p-8">
       <div className="lg:flex grid gap-2 items-center font-main">
         <div className="">
-          <input
+          {/* <input
             type="text"
             value={textInput}
             onChange={handleTextInputChange}
             className="w-full lg:w-96 border rounded p-2"
             placeholder="Enter task"
-          />
+          /> */}
         </div>
-        <button onClick={handleTaskSubmit} className="btn btn-secondary">
+        <button onClick={() => props.openModal} className="btn btn-secondary">
           Add Task
         </button>
       </div>
@@ -124,6 +125,7 @@ const TaskBoard = () => {
           {/* To Do */}
           <StatusLayout
             id="to-do"
+            openModal={props.setOpenModal}
             getTasksByStatus={getTasksByStatus}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}
@@ -136,6 +138,7 @@ const TaskBoard = () => {
           {/* Doing */}
           <StatusLayout
             id="doing"
+            openModal={props.setOpenModal}
             getTasksByStatus={getTasksByStatus}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}
@@ -148,6 +151,7 @@ const TaskBoard = () => {
           {/* Done */}
           <StatusLayout
             id="done"
+            openModal={props.setOpenModal}
             getTasksByStatus={getTasksByStatus}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}
