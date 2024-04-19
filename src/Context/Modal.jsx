@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 
-const Modal = ({ open, close }, props) => { 
+const Modal = (props) => { 
 
-    const [tasks, setTasks] = useState([]);
+    const [tasks, setTasks] = [props.tasks, props.setTasks];
     const [textInput, setTextInput] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
     const [selectedGroup, setSelectedGroup] = useState("");
@@ -10,16 +10,7 @@ const Modal = ({ open, close }, props) => {
     const [selectedPriority, setSelectedPriority] = useState("High");
   const [selectedTask, setSelectedTask] = useState(null);
 
-  // UseEffect For StoredTasks in Local Stroage
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+  // UseEffect For StoredTasks in Local Stroag
 
   const handleTextInputChange = (event) => {
     setTextInput(event.target.value);
@@ -56,6 +47,7 @@ const Modal = ({ open, close }, props) => {
     };
 
     setTasks([...tasks, newTask]);
+
     setTextInput("");
     setSelectedStatus("To Do");
     setSelectedPriority("Medium");
@@ -102,14 +94,15 @@ const Modal = ({ open, close }, props) => {
     setSelectedTask(null);
   };
 
-    if (!open) {
+    if (!props.open) {
         return null;
     }
+    console.log("After update: ", tasks);
 
     return (
         <div className="overlay">
             <div className="modalContainer">
-                <p onClick={close} className="closeButton">X</p>  
+                <p onClick={props.close} className="closeButton">X</p>  
                 <br/>
                 <h1 className="modalTitle">Task</h1>
                 <div className="textInput inputField">
@@ -123,9 +116,9 @@ const Modal = ({ open, close }, props) => {
 
                     <p>Enter status:</p>
                     <select value={selectedStatus} onChange={handleStatusChange} className="w-full lg:w-96 border rounded p-2">
-                        <option value="High">To Do</option>
-                        <option value="Medium">Doing</option>
-                        <option value="Low">Done</option>
+                        <option value="To Do">To Do</option>
+                        <option value="Doing">Doing</option>
+                        <option value="Done">Done</option>
                     </select>
 
                 </div>
@@ -143,7 +136,7 @@ const Modal = ({ open, close }, props) => {
                 <div className="buttonBox">
                   <button class="btn" onClick={() => {
                     handleTaskSubmit();
-                    close();
+                    props.close();
                   }}>Submit</button>
 
                 </div>

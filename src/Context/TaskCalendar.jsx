@@ -43,6 +43,14 @@ const TaskCalendar = () => {
     setSelectedPriority(event.target.value);
   };
 
+  const handleChangePriority = (newPriority) => {
+    const updatedTasks = tasks.map((task) =>
+      task === selectedTask ? { ...task, priority: newPriority } : task
+    );
+    setTasks(updatedTasks);
+    setSelectedTask(null);
+  };
+
   const handleTaskSubmit = () => {
     if (textInput.trim() === "" || selectedTime === "") {
       return;

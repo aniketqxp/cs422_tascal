@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import StatusLayout from "./StatusLayout";
-import Modal from "./Modal";
 
 const TaskBoard = (props) => {
-    const [tasks, setTasks] = useState([]);
-    const [textInput, setTextInput] = useState("");
+  const [tasks, setTasks] = [props.tasks, props.setTasks];
+  const [textInput, setTextInput] = useState("");
     const [selectedTime, setSelectedTime] = useState("");
     const [selectedGroup, setSelectedGroup] = useState("");
     const [selectedStatus, setSelectedStatus] = useState("To Do");
@@ -12,15 +11,8 @@ const TaskBoard = (props) => {
   const [selectedTask, setSelectedTask] = useState(null);
 
   // UseEffect For StoredTasks in Local Stroage
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+ 
+
 
   const handleTextInputChange = (event) => {
     setTextInput(event.target.value);
@@ -45,6 +37,7 @@ const TaskBoard = (props) => {
   // Handle Function When Click On Submit
   const handleTaskSubmit = () => {
     if (textInput.trim() === "") {
+
       return;
     }
     const newTask = {
@@ -55,7 +48,6 @@ const TaskBoard = (props) => {
       status: selectedStatus,
       priority: selectedPriority
     };
-
     setTasks([...tasks, newTask]);
     setTextInput("");
     setSelectedStatus("To Do");
@@ -105,27 +97,13 @@ const TaskBoard = (props) => {
 
   return (
     <div className="p-8">
-      <div className="lg:flex grid gap-2 items-center font-main">
-        <div className="">
-          {/* <input
-            type="text"
-            value={textInput}
-            onChange={handleTextInputChange}
-            className="w-full lg:w-96 border rounded p-2"
-            placeholder="Enter task"
-          /> */}
-        </div>
-        <button onClick={() => props.openModal} className="btn btn-secondary">
-          Add Task
-        </button>
-      </div>
+      
 
       <div className="mt-8 space-y-4 text-black ">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* To Do */}
           <StatusLayout
             id="to-do"
-            openModal={props.setOpenModal}
             getTasksByStatus={getTasksByStatus}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}
@@ -134,11 +112,13 @@ const TaskBoard = (props) => {
             handleChangeStatus={handleChangeStatus}
             handleDeleteTask={handleDeleteTask}
             status="To Do"
+            tasks = {tasks}
+
           />
           {/* Doing */}
           <StatusLayout
             id="doing"
-            openModal={props.setOpenModal}
+
             getTasksByStatus={getTasksByStatus}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}
@@ -147,6 +127,7 @@ const TaskBoard = (props) => {
             handleChangeStatus={handleChangeStatus}
             handleDeleteTask={handleDeleteTask}
             status="Doing"
+            tasks = {tasks}
           />
           {/* Done */}
           <StatusLayout
@@ -160,6 +141,8 @@ const TaskBoard = (props) => {
             handleChangeStatus={handleChangeStatus}
             handleDeleteTask={handleDeleteTask}
             status="Done"
+            tasks = {tasks}
+            
           />
         </div>
       </div>

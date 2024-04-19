@@ -9,17 +9,6 @@ const TaskFunction = (initialTasks = []) => {
   const [selectedPriority, setSelectedPriority] = useState("High");
   const [selectedTask, setSelectedTask] = useState(null);
 
-  // UseEffect For StoredTasks in Local Stroage
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
-
   const handleTextInputChange = (event) => {
     setTextInput(event.target.value);
   };

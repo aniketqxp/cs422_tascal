@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import "./App.css";
 import TaskList from "./Context/TaskList";
 import TaskBoard from "./Context/TaskBoard";
@@ -8,7 +8,18 @@ import Modal from "./Context/Modal"
 
 function App() {
   const [currentScene, setCurrentScene] = useState("taskList");
-  
+  const [tasks, setTasks] = useState([]);
+  useEffect(() => {
+    const storedTasks = localStorage.getItem("tasks");
+    if (storedTasks) {
+      setTasks(JSON.parse(storedTasks));
+    }
+  }, []);
+
+  useEffect(() => {
+    console.log('updated tasks', tasks)
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
   const [openModal, setOpenModal] = useState(false);
 
 
@@ -22,7 +33,7 @@ function App() {
 
   return (
     <div>
-      <Modal open={openModal} close={onClose}/>
+      <Modal open={openModal} close={onClose} tasks={tasks} setTasks={setTasks}/>
 
       {/* Modal menu for task submission */}
 
@@ -54,9 +65,9 @@ function App() {
       </div>
 
       {/* Render the current scene based on the state */}
-      {currentScene === "calendar" && <TaskCalendar openModal={setOpenModal}/>}
-      {currentScene === "board" && <TaskBoard openModal={setOpenModal}/>}
-      {currentScene === "list" && <TaskList openModal={setOpenModal}/>}
+      {currentScene === "calendar" && <TaskCalendar openModal={setOpenModal} tasks={tasks} setTasks={setTasks}/>}
+      {currentScene === "board" && <TaskBoard openModal={setOpenModal} tasks={tasks} setTasks={setTasks}/>}
+      {currentScene === "list" && <TaskList openModal={setOpenModal} tasks={tasks} setTasks={setTasks}/>}
 
     </div>
   );
