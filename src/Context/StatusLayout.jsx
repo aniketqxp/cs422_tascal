@@ -4,11 +4,12 @@ import "./StatusLayout.css"; // Import the CSS file
 
 function StatusLayout(props) {
   return (
-    <div className="status-layout">
+    <div className="status-layout p-8">
       <h2 className="status-title">{props.status}</h2>
       {props.getTasksByStatus(props.status).map((task, index) => (
         <div key={index} className="task-item" onClick={() => props.setSelectedTask(task)}>
-          - {task.text}
+          <b>{task.text}</b> <br></br>
+          - {props.date_format(task.time)}
           {props.selectedTask === task && (
             <Action
               status={props.status}

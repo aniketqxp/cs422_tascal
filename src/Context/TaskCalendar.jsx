@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import EditTask from "./EditTask";
-import StatusLayout from "./StatusLayout";
 
 const TaskCalendar = () => {
   const [tasks, setTasks] = useState([]);
@@ -11,6 +10,7 @@ const TaskCalendar = () => {
   const [selectedStatus, setSelectedStatus] = useState("To Do");
   const [selectedPriority, setSelectedPriority] = useState("High");
   const [editTask, setEditTask] = useState(null);
+  const [selectedTask, setSelectedTask] = useState(null);
 
   useEffect(() => {
     const storedTasks = localStorage.getItem("tasks");
@@ -43,13 +43,7 @@ const TaskCalendar = () => {
     setSelectedPriority(event.target.value);
   };
 
-  const handleChangePriority = (newPriority) => {
-    const updatedTasks = tasks.map((task) =>
-      task === selectedTask ? { ...task, priority: newPriority } : task
-    );
-    setTasks(updatedTasks);
-    setSelectedTask(null);
-  };
+  
 
   const handleTaskSubmit = () => {
     if (textInput.trim() === "" || selectedTime === "") {
@@ -74,62 +68,45 @@ const TaskCalendar = () => {
   };
 
   const handleEditTask = (task) => {
-    setEditTask(task);
+    const newTaskText = prompt("Edit task:", task.text);
+    if (newTaskText !== null && newTaskText !== task.text) {
+      const updatedTasks = tasks.map(t => {
+        if (t.id === task.id) {
+          return { ...t, text: newTaskText };
+        }
+        return t;
+      });
+      setTasks(updatedTasks);
+    }
   };
 
   const handlers = useSwipeable({
     onSwipedLeft: () => setEditTask(null),
   });
 
-  const sortedTasksByDate = tasks.reduce((acc, task) => {
-    const date = task.time.split("T")[0];
-    acc[date] = acc[date] || [];
-    acc[date].push(task);
-    return acc;
-  }, {});
+  const sortedTasks = tasks.sort((a, b) => {
+    const timeA = new Date(a.time);
+    const timeB = new Date(b.time);
+    return timeA - timeB;
+  });
 
   return (
-    <div>
-      <div className="p-8">
-        <div className="lg:flex grid gap-2 items-center font-main">
-          <div className="">
-            <input
-              type="text"
-              value={textInput}
-              onChange={handleTextInputChange}
-              className="w-full lg:w-96 border rounded p-2"
-              placeholder="Enter task"
-            />
-          </div>
-          <div className="">
-            <input
-              type="datetime-local"
-              value={selectedTime}
-              onChange={handleTimeChange}
-              className="w-full border rounded p-2"
-            />
-          </div>
-          <button onClick={handleTaskSubmit} className="btn btn-secondary">
-            Add Task
-          </button>
-        </div>
-      </div>
+    <div className="p-8">
       <div className="mt-8 space-y-4 text-black">
-        {Object.keys(sortedTasksByDate).map((date) => (
-          <div key={date}>
-            <h2>{date}</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-              <StatusLayout
-                id={date}
-                getTasksByStatus={() => sortedTasksByDate[date]}
-                setSelectedTask={setEditTask}
-                selectedTask={editTask}
-                handleEditTask={handleEditTask}
-                handleDeleteTask={handleDeleteTask}
-              />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          {sortedTasks.map((task) => (
+            <div key={task.id} className="task-item" {...handlers}>
+              <div className="task-box">
+                <div>{task.text}</div>
+                <div>{task.time}</div>
+              </div>
+              <div className="task-cal-actions">
+                <button className="calendar-button" onClick={() => handleEditTask(task)}>Edit</button>
+                <button className="calendar-button" onClick={() => handleDeleteTask(task.id)}>Delete</button>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       {editTask && <EditTask task={editTask} />}
     </div>

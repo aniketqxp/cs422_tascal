@@ -1,11 +1,18 @@
 /* StatusLayout.css */
 
 .status-layout {
-  background-color: #ecebd7;
+  background-color: #9cc9f8;
   padding: 1rem;
-  border: 1px solid #ccc;
+  border: 1px solid #000;
   border-radius: 8px;
 }
+
+/* .status-layout:hover {
+  background-color: #6583a3;
+  padding: 1rem;
+  border: 1px solid #000;
+  border-radius: 8px;
+} */
 
 .status-title {
   font-size: 1.5rem;
@@ -14,15 +21,15 @@
 }
 
 .task-item {
-  background-color: #111111;
+  background-color: #ffffff;
   padding: 0.5rem;
   border-radius: 4px;
   margin-bottom: 0.5rem;
   cursor: pointer;
-  color: #e3a242;
+  color: #007bff;
 }
 
 .task-item:hover {
-  background-color: #e3a242;
+  background-color: #5a97ff;
   color: #111111
 }

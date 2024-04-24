@@ -7,8 +7,29 @@ import Modal from "./Context/Modal"
 
 
 function App() {
-  const [currentScene, setCurrentScene] = useState("taskList");
+  const [currentScene, setCurrentScene] = useState("board");
   const [tasks, setTasks] = useState([]);
+  const [openModal, setOpenModal] = useState(false);
+
+  // Display
+  const dateFormat = {
+    year: 'numeric', // e.g., "2024"
+    month: 'long', // e.g., "April"
+    day: 'numeric', // e.g., "23"
+    hour: '2-digit', // e.g., "03"
+    minute: '2-digit', // e.g., "00"
+    hour12: true // Use AM/PM
+  };
+
+  const formatTime = (timeString) => {
+    if (timeString.length == 0) {
+      return null;
+    }
+    let date = new Date(timeString);
+    
+    return date.toLocaleDateString('en-US', dateFormat);
+  }
+
   useEffect(() => {
     const storedTasks = localStorage.getItem("tasks");
     if (storedTasks) {
@@ -20,7 +41,7 @@ function App() {
     console.log('updated tasks', tasks)
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
-  const [openModal, setOpenModal] = useState(false);
+  
 
 
   const handleSceneChange = (scene) => {
@@ -31,6 +52,7 @@ function App() {
     setOpenModal(false);
   }
 
+  
   return (
     <div>
       <Modal open={openModal} close={onClose} tasks={tasks} setTasks={setTasks}/>
@@ -40,34 +62,56 @@ function App() {
 
       {/* Top bar with app name and menu button */}
       <div className="top-bar">
-      <button className="menu-button" onClick={() => handleSceneChange("menu")}>
-          ☰
-        </button>
         <span className="app-name">TasCal</span>
         <button className="btn" onClick={() => setOpenModal(!openModal)}>Add Task</button>
       </div>
 
-      
-      
+    
 
 
       {/* Second bar with selectable scenes */}
       <div className="scene-bar">
-        <button className={currentScene === "calendar" ? "selected" : ""} onClick={() => handleSceneChange("calendar")}>
-          Calendar
-        </button>
-        <button className={currentScene === "board" ? "selected" : ""} onClick={() => handleSceneChange("board")}>
+        <div className="viewselector">
+          <button className={currentScene === "calendar" ? "selected" : "viewselector"} onClick={() => handleSceneChange("calendar")}>
+            Calendar
+          </button>
+        </div>
+        <button className={currentScene === "board" ? "selected" : "viewselector"} onClick={() => handleSceneChange("board")}>
           Board
         </button>
-        <button className={currentScene === "list" ? "selected" : ""} onClick={() => handleSceneChange("list")}>
+        <button className={currentScene === "list" ? "selected" : "viewselector"} onClick={() => handleSceneChange("list")}>
           List
         </button>
       </div>
 
       {/* Render the current scene based on the state */}
-      {currentScene === "calendar" && <TaskCalendar openModal={setOpenModal} tasks={tasks} setTasks={setTasks}/>}
-      {currentScene === "board" && <TaskBoard openModal={setOpenModal} tasks={tasks} setTasks={setTasks}/>}
-      {currentScene === "list" && <TaskList openModal={setOpenModal} tasks={tasks} setTasks={setTasks}/>}
+      
+      {currentScene === "calendar" && 
+        <TaskCalendar 
+          openModal = {setOpenModal} 
+          tasks = {tasks} 
+          setTasks = {setTasks}
+          date_format = {formatTime}
+        />
+      }
+      
+      {currentScene === "board" && 
+        <TaskBoard 
+          openModal = {setOpenModal} 
+          tasks = {tasks}
+          setTasks = {setTasks}
+          date_format = {formatTime}
+        />
+      }
+      
+      {currentScene === "list" && 
+        <TaskList
+          openModal={setOpenModal} 
+          tasks={tasks} 
+          setTasks={setTasks}
+          date_format = {formatTime}
+        />
+      }
 
     </div>
   );

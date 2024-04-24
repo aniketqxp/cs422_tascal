@@ -31,10 +31,11 @@ const Action = (props) => {
       <button // Delete
         className="btn btn-secondary"
         onClick={() => {
-          window.alert(
-            `Press Sure Wan't Delete ${props.priority} Priority Task`
-          );
           props.handleDeleteTask();
+          window.alert(
+            `${props.selectedTask.text} Deleted Successfully `
+          );
+          
         }}
       >Delete</button>
 

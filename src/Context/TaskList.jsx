@@ -71,31 +71,6 @@ const TaskList = () => {
 
   return (
     <div className="p-8">
-      <div className="lg:flex grid gap-2 items-center font-main">
-        <div className="">
-          <input
-            type="text"
-            value={textInput}
-            onChange={handleTextInputChange}
-            className="w-full lg:w-96 border rounded p-2"
-            placeholder="Enter task"
-          />
-        </div>
-        <div className="">
-          <select
-            value={selectedPriority}
-            onChange={handlePriorityChange}
-            className="w-full border rounded p-2"
-          >
-            <option value="High">High Priority</option>
-            <option value="Medium">Medium Priority</option>
-            <option value="Low">Low Priority</option>
-          </select>
-        </div>
-        <button onClick={handleTaskSubmit} className="btn btn-secondary">
-          Add Task
-        </button>
-      </div>
 
       <div className="mt-8 space-y-4 text-black ">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">

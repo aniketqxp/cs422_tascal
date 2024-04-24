@@ -48,6 +48,7 @@ const TaskBoard = (props) => {
       status: selectedStatus,
       priority: selectedPriority
     };
+    console.log(newTask);
     setTasks([...tasks, newTask]);
     setTextInput("");
     setSelectedStatus("To Do");
@@ -104,13 +105,14 @@ const TaskBoard = (props) => {
           {/* To Do */}
           <StatusLayout
             id="to-do"
-            getTasksByStatus={getTasksByStatus}
-            setSelectedTask={setSelectedTask}
-            selectedTask={selectedTask}
-            handleEditTask={handleEditTask}
-            handleChangePriority={handleChangePriority}
-            handleChangeStatus={handleChangeStatus}
-            handleDeleteTask={handleDeleteTask}
+            date_format = {props.date_format}
+            getTasksByStatus = {getTasksByStatus}
+            setSelectedTask = {setSelectedTask}
+            selectedTask = {selectedTask}
+            handleEditTask = {handleEditTask}
+            handleChangePriority = {handleChangePriority}
+            handleChangeStatus = {handleChangeStatus}
+            handleDeleteTask = {handleDeleteTask}
             status="To Do"
             tasks = {tasks}
 
@@ -118,28 +120,29 @@ const TaskBoard = (props) => {
           {/* Doing */}
           <StatusLayout
             id="doing"
-
-            getTasksByStatus={getTasksByStatus}
-            setSelectedTask={setSelectedTask}
-            selectedTask={selectedTask}
-            handleEditTask={handleEditTask}
-            handleChangePriority={handleChangePriority}
-            handleChangeStatus={handleChangeStatus}
-            handleDeleteTask={handleDeleteTask}
+            date_format = {props.date_format}
+            getTasksByStatus = {getTasksByStatus}
+            setSelectedTask = {setSelectedTask}
+            selectedTask = {selectedTask}
+            handleEditTask = {handleEditTask}
+            handleChangePriority = {handleChangePriority}
+            handleChangeStatus = {handleChangeStatus}
+            handleDeleteTask = {handleDeleteTask}
             status="Doing"
             tasks = {tasks}
           />
           {/* Done */}
           <StatusLayout
             id="done"
-            openModal={props.setOpenModal}
-            getTasksByStatus={getTasksByStatus}
-            setSelectedTask={setSelectedTask}
-            selectedTask={selectedTask}
-            handleEditTask={handleEditTask}
-            handleChangePriority={handleChangePriority}
-            handleChangeStatus={handleChangeStatus}
-            handleDeleteTask={handleDeleteTask}
+            date_format = {props.date_format}
+             openModal = {props.setOpenModal}
+            getTasksByStatus = {getTasksByStatus}
+            setSelectedTask = {setSelectedTask}
+            selectedTask = {selectedTask}
+            handleEditTask = {handleEditTask}
+            handleChangePriority = {handleChangePriority}
+            handleChangeStatus = {handleChangeStatus}
+            handleDeleteTask = {handleDeleteTask}
             status="Done"
             tasks = {tasks}
             

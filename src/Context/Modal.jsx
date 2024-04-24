@@ -2,12 +2,12 @@ import React, { useEffect, useState } from "react";
 
 const Modal = (props) => { 
 
-    const [tasks, setTasks] = [props.tasks, props.setTasks];
-    const [textInput, setTextInput] = useState("");
-    const [selectedTime, setSelectedTime] = useState("");
-    const [selectedGroup, setSelectedGroup] = useState("");
-    const [selectedStatus, setSelectedStatus] = useState("To Do");
-    const [selectedPriority, setSelectedPriority] = useState("High");
+  const [tasks, setTasks] = [props.tasks, props.setTasks];
+  const [textInput, setTextInput] = useState("");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("To Do");
+  const [selectedPriority, setSelectedPriority] = useState("High");
   const [selectedTask, setSelectedTask] = useState(null);
 
   // UseEffect For StoredTasks in Local Stroag
