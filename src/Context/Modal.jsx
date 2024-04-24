@@ -4,7 +4,6 @@ const Modal = (props) => {
   const [tasks, setTasks] = [props.tasks, props.setTasks];
   const [textInput, setTextInput] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
-  const [selectedGroup, setSelectedGroup] = useState("");
   const [selectedStatus, setSelectedStatus] = useState("To Do");
   const [selectedPriority, setSelectedPriority] = useState("Medium");
 
@@ -26,7 +25,6 @@ const Modal = (props) => {
     const newTask = {
       id: tasks.length + 1,
       text: textInput,
-      group: selectedGroup,
       time: selectedTime,
       status: selectedStatus,
       priority: selectedPriority
@@ -48,7 +46,6 @@ const Modal = (props) => {
     const newTask = {
       id: props.selectedTask.id,
       text: textInput,
-      group: selectedGroup,
       time: selectedTime,
       status: selectedStatus,
       priority: selectedPriority

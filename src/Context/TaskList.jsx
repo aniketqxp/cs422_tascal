@@ -1,10 +1,8 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import Layout from "./Layout";
 
 const TaskList = (props) => {
   const [tasks, setTasks] = [props.tasks, props.setTasks];
-  const [textInput, setTextInput] = useState("");
-  const [selectedPriority, setSelectedPriority] = useState("High");
   const [selectedTask, setSelectedTask] = useState(null);
 
 
@@ -13,21 +11,6 @@ const TaskList = (props) => {
     return tasks.filter((task) => task.priority === priority);
   };
 
-  const handleEditTask = (editedText) => {
-    const updatedTasks = tasks.map((task) =>
-      task === selectedTask ? { ...task, text: editedText } : task
-    );
-    setTasks(updatedTasks);
-    setSelectedTask(null);
-  };
-
-  const handleChangePriority = (newPriority) => {
-    const updatedTasks = tasks.map((task) =>
-      task === selectedTask ? { ...task, priority: newPriority } : task
-    );
-    setTasks(updatedTasks);
-    setSelectedTask(null);
-  };
 
   const handleDeleteTask = () => {
     const updatedTasks = tasks.filter((task) => task !== selectedTask);

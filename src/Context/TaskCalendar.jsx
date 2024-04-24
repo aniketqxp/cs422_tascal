@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState} from "react";
 import { useSwipeable } from "react-swipeable";
 import EditTask from "./EditTask";
 

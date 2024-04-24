@@ -1,4 +1,3 @@
-import React, { useEffect, useState } from "react";
 import StatusLayout from "./StatusLayout";
 
 const TaskBoard = (props) => {
