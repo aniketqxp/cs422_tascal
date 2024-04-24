@@ -8,7 +8,6 @@ function StatusLayout(props) {
       <h2 className="status-title">{props.status}</h2>
       {props.getTasksByStatus(props.status).map((task, index) => (
         <div key={index} className="task-item" onClick={() => props.setSelectedTask(task)}>
-          {console.log(props.selectedTask)}
 
           <b>{task.text}</b> <br/>
           🗓️ {props.date_format(task.time)} <br/>

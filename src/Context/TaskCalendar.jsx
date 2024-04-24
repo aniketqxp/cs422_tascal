@@ -27,7 +27,7 @@ const TaskCalendar = (props) => {
       <div className="mt-8 space-y-4 text-black">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {sortedTasks.map((task) => (
-            <div key={task.id} className="task-item" {...handlers}>
+            <div key={task.id} className="task-cal-item" {...handlers}>
               <div className="task-box">
                 <p><b>{task.text}</b></p>    
                 <p>🗓️ {props.date_format(task.time)}</p>
@@ -35,11 +35,11 @@ const TaskCalendar = (props) => {
                 <p>❗ {task.priority} Priority</p>
               </div>
               <div className="task-cal-actions">
-                <button className="calendar-button" onClick={() =>{
+                <button className="calendar-button btn" onClick={() =>{
                   props.setSelectedTask(task);
                   props.setOpenModal(true);
                 }}>Edit</button>
-                <button className="calendar-button" onClick={() => handleDeleteTask(task.id)}>Delete</button>
+                <button className="calendar-button btn" onClick={() => handleDeleteTask(task.id)}>Delete</button>
               </div>
             </div>
           ))}

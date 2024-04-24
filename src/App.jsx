@@ -25,7 +25,6 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('updated tasks', tasks)
     localStorage.setItem("tasks", JSON.stringify(tasks));
   }, [tasks]);
   
@@ -78,8 +77,8 @@ function App() {
         <span className="app-name">TasCal</span>
         <button className="btn" onClick={
           () => {
-            setSelectedTask(null);
-            setOpenModal(true);
+              setSelectedTask(null);
+              setOpenModal(true);
             }
           }
         >Add Task</button>

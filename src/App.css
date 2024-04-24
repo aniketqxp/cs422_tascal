@@ -68,6 +68,16 @@
   justify-content: space-between;
 }
 
+.task-cal-item {
+  background-color: #ffffff;
+  padding: 0.5rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  color: #007bff;
+}
+
+
+
 .overlay {
   background-color: rgba(0, 0, 0, 0.5);
   position: fixed;
