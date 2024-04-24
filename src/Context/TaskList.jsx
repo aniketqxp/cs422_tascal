@@ -1,22 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Layout from "./Layout";
 
-const TaskList = () => {
-  const [tasks, setTasks] = useState([]);
+const TaskList = (props) => {
+  const [tasks, setTasks] = [props.tasks, props.setTasks];
   const [textInput, setTextInput] = useState("");
   const [selectedPriority, setSelectedPriority] = useState("High");
   const [selectedTask, setSelectedTask] = useState(null);
 
-  // UseEffect For StoredTasks in Local Stroage
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []);
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
 
   // With Help Of State Management We Handle Input Change
   const handleTextInputChange = (event) => {
@@ -76,6 +66,7 @@ const TaskList = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           {/* High Priority */}
           <Layout
+            date_format = {props.date_format}
             getTasksByPriority={getTasksByPriority}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}
@@ -86,6 +77,7 @@ const TaskList = () => {
           />
           {/* Medium Priority */}
           <Layout
+            date_format = {props.date_format}
             getTasksByPriority={getTasksByPriority}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}
@@ -96,6 +88,7 @@ const TaskList = () => {
           />
           {/* Low Priority */}
           <Layout
+            date_format = {props.date_format}
             getTasksByPriority={getTasksByPriority}
             setSelectedTask={setSelectedTask}
             selectedTask={selectedTask}

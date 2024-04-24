@@ -59,11 +59,13 @@
 }
 
 .task-box {
-  color: #E5E3D2; /* Platinum */
+  color: black; /* Platinum */
 }
 
 .task-cal-actions {
-  color: #E5E3D2; /* Platinum */
+  color: black; /* Platinum */
+  display: flex;
+  justify-content: space-between;
 }
 
 .overlay {

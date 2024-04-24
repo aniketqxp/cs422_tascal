@@ -4,10 +4,10 @@ import StatusLayout from "./StatusLayout";
 const TaskBoard = (props) => {
   const [tasks, setTasks] = [props.tasks, props.setTasks];
   const [textInput, setTextInput] = useState("");
-    const [selectedTime, setSelectedTime] = useState("");
-    const [selectedGroup, setSelectedGroup] = useState("");
-    const [selectedStatus, setSelectedStatus] = useState("To Do");
-    const [selectedPriority, setSelectedPriority] = useState("High");
+  const [selectedTime, setSelectedTime] = useState("");
+  const [selectedGroup, setSelectedGroup] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("To Do");
+  const [selectedPriority, setSelectedPriority] = useState("High");
   const [selectedTask, setSelectedTask] = useState(null);
 
   // UseEffect For StoredTasks in Local Stroage
@@ -145,7 +145,6 @@ const TaskBoard = (props) => {
             handleDeleteTask = {handleDeleteTask}
             status="Done"
             tasks = {tasks}
-            
           />
         </div>
       </div>

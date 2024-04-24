@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useSwipeable } from "react-swipeable";
 import EditTask from "./EditTask";
 
-const TaskCalendar = () => {
-  const [tasks, setTasks] = useState([]);
+const TaskCalendar = (props) => {
+  const [tasks, setTasks] = [props.tasks, props.setTasks];
   const [textInput, setTextInput] = useState("");
   const [selectedTime, setSelectedTime] = useState("");
   const [selectedGroup, setSelectedGroup] = useState("");
@@ -12,16 +12,6 @@ const TaskCalendar = () => {
   const [editTask, setEditTask] = useState(null);
   const [selectedTask, setSelectedTask] = useState(null);
 
-  useEffect(() => {
-    const storedTasks = localStorage.getItem("tasks");
-    if (storedTasks) {
-      setTasks(JSON.parse(storedTasks));
-    }
-  }, []);
-
-  useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
 
   const handleTextInputChange = (event) => {
     setTextInput(event.target.value);
@@ -97,8 +87,10 @@ const TaskCalendar = () => {
           {sortedTasks.map((task) => (
             <div key={task.id} className="task-item" {...handlers}>
               <div className="task-box">
-                <div>{task.text}</div>
-                <div>{task.time}</div>
+                <p><b>{task.text}</b></p>    
+                <p>🗓️ {props.date_format(task.time)}</p>
+                <p>🔨 {task.status}</p>
+                <p>❗ {task.priority} Priority</p>
               </div>
               <div className="task-cal-actions">
                 <button className="calendar-button" onClick={() => handleEditTask(task)}>Edit</button>

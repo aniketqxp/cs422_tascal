@@ -11,24 +11,6 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [openModal, setOpenModal] = useState(false);
 
-  // Display
-  const dateFormat = {
-    year: 'numeric', // e.g., "2024"
-    month: 'long', // e.g., "April"
-    day: 'numeric', // e.g., "23"
-    hour: '2-digit', // e.g., "03"
-    minute: '2-digit', // e.g., "00"
-    hour12: true // Use AM/PM
-  };
-
-  const formatTime = (timeString) => {
-    if (timeString.length == 0) {
-      return null;
-    }
-    let date = new Date(timeString);
-    
-    return date.toLocaleDateString('en-US', dateFormat);
-  }
 
   useEffect(() => {
     const storedTasks = localStorage.getItem("tasks");
@@ -50,6 +32,25 @@ function App() {
 
   const onClose = () => {
     setOpenModal(false);
+  }
+
+   // Display
+   const dateFormat = {
+    year: 'numeric', // e.g., "2024"
+    month: 'long', // e.g., "April"
+    day: 'numeric', // e.g., "23"
+    hour: '2-digit', // e.g., "03"
+    minute: '2-digit', // e.g., "00"
+    hour12: true // Use AM/PM
+  };
+
+  const formatTime = (timeString) => {
+    if (timeString.length == 0) {
+      return null;
+    }
+    let date = new Date(timeString);
+    
+    return date.toLocaleDateString('en-US', dateFormat);
   }
 
   
