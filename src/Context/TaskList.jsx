@@ -8,30 +8,6 @@ const TaskList = (props) => {
   const [selectedTask, setSelectedTask] = useState(null);
 
 
-  // With Help Of State Management We Handle Input Change
-  const handleTextInputChange = (event) => {
-    setTextInput(event.target.value);
-  };
-  // handlePriorityChange
-  const handlePriorityChange = (event) => {
-    setSelectedPriority(event.target.value);
-  };
-
-  // Handle Function When Click On Submit
-  const handleTaskSubmit = () => {
-    if (textInput.trim() === "") {
-      return;
-    }
-    // Selecting The New Task To Put
-    const newTask = {
-      text: textInput,
-      priority: selectedPriority,
-    };
-
-    setTasks([...tasks, newTask]);
-    setTextInput("");
-    setSelectedPriority("High");
-  };
 
   const getTasksByPriority = (priority) => {
     return tasks.filter((task) => task.priority === priority);
@@ -69,10 +45,8 @@ const TaskList = (props) => {
             date_format = {props.date_format}
             getTasksByPriority={getTasksByPriority}
             setSelectedTask={setSelectedTask}
+            handleDeleteTask = {handleDeleteTask}
             selectedTask={selectedTask}
-            handleEditTask={handleEditTask}
-            handleChangePriority={handleChangePriority}
-            handleDeleteTask={handleDeleteTask}
             level="High"
           />
           {/* Medium Priority */}
@@ -80,10 +54,8 @@ const TaskList = (props) => {
             date_format = {props.date_format}
             getTasksByPriority={getTasksByPriority}
             setSelectedTask={setSelectedTask}
+            handleDeleteTask = {handleDeleteTask}
             selectedTask={selectedTask}
-            handleEditTask={handleEditTask}
-            handleChangePriority={handleChangePriority}
-            handleDeleteTask={handleDeleteTask}
             level="Medium"
           />
           {/* Low Priority */}
@@ -91,10 +63,8 @@ const TaskList = (props) => {
             date_format = {props.date_format}
             getTasksByPriority={getTasksByPriority}
             setSelectedTask={setSelectedTask}
+            handleDeleteTask = {handleDeleteTask}
             selectedTask={selectedTask}
-            handleEditTask={handleEditTask}
-            handleChangePriority={handleChangePriority}
-            handleDeleteTask={handleDeleteTask}
             level="Low"
           />
         </div>

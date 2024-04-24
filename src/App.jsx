@@ -11,6 +11,11 @@ function App() {
   const [tasks, setTasks] = useState([]);
   const [openModal, setOpenModal] = useState(false);
 
+  const [textInput, setTextInput] = useState("");
+
+  const [selectedTask, setSelectedTask] = useState(null);
+  
+
 
   useEffect(() => {
     const storedTasks = localStorage.getItem("tasks");
@@ -45,7 +50,7 @@ function App() {
   };
 
   const formatTime = (timeString) => {
-    if (timeString.length == 0) {
+    if (timeString.length === 0) {
       return null;
     }
     let date = new Date(timeString);
@@ -53,10 +58,17 @@ function App() {
     return date.toLocaleDateString('en-US', dateFormat);
   }
 
+
   
   return (
     <div>
-      <Modal open={openModal} close={onClose} tasks={tasks} setTasks={setTasks}/>
+      <Modal
+      open={openModal}
+      close={onClose}
+      tasks={tasks}
+      setTasks={setTasks}
+      selectedTask={selectedTask}
+      setSelectedTask={setSelectedTask}/>
 
       {/* Modal menu for task submission */}
 
@@ -64,7 +76,15 @@ function App() {
       {/* Top bar with app name and menu button */}
       <div className="top-bar">
         <span className="app-name">TasCal</span>
-        <button className="btn" onClick={() => setOpenModal(!openModal)}>Add Task</button>
+        <button className="btn" onClick={
+          () => {
+            setSelectedTask(null);
+            setOpenModal(true);
+            }
+          }
+        >Add Task</button>
+      
+      
       </div>
 
     
@@ -78,10 +98,10 @@ function App() {
           </button>
         </div>
         <button className={currentScene === "board" ? "selected" : "viewselector"} onClick={() => handleSceneChange("board")}>
-          Board
+          Status
         </button>
         <button className={currentScene === "list" ? "selected" : "viewselector"} onClick={() => handleSceneChange("list")}>
-          List
+          Priority
         </button>
       </div>
 
@@ -89,27 +109,38 @@ function App() {
       
       {currentScene === "calendar" && 
         <TaskCalendar 
-          openModal = {setOpenModal} 
+          openModal = {openModal}
+          setOpenModal = {setOpenModal}
+          textInput = {textInput}
+          setTextInput = {setTextInput}
           tasks = {tasks} 
           setTasks = {setTasks}
+          selectedTask = {selectedTask}
+          setSelectedTask = {setSelectedTask}
           date_format = {formatTime}
         />
       }
       
       {currentScene === "board" && 
         <TaskBoard 
-          openModal = {setOpenModal} 
+          openModal = {openModal}
+          setOpenModal = {setOpenModal}
           tasks = {tasks}
           setTasks = {setTasks}
+          selectedTask = {selectedTask}
+          setSelectedTask = {setSelectedTask}
           date_format = {formatTime}
         />
       }
       
       {currentScene === "list" && 
         <TaskList
-          openModal={setOpenModal} 
+          openModal = {openModal}
+          setOpenModal = {setOpenModal}
           tasks={tasks} 
           setTasks={setTasks}
+          selectedTask = {selectedTask}
+          setSelectedTask = {setSelectedTask}
           date_format = {formatTime}
         />
       }

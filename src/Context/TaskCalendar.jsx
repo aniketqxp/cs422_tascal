@@ -4,70 +4,12 @@ import EditTask from "./EditTask";
 
 const TaskCalendar = (props) => {
   const [tasks, setTasks] = [props.tasks, props.setTasks];
-  const [textInput, setTextInput] = useState("");
-  const [selectedTime, setSelectedTime] = useState("");
-  const [selectedGroup, setSelectedGroup] = useState("");
-  const [selectedStatus, setSelectedStatus] = useState("To Do");
-  const [selectedPriority, setSelectedPriority] = useState("High");
   const [editTask, setEditTask] = useState(null);
-  const [selectedTask, setSelectedTask] = useState(null);
 
 
-  const handleTextInputChange = (event) => {
-    setTextInput(event.target.value);
-  };
-
-  const handleGroupChange = (event) => {
-    setSelectedGroup(event.target.value);
-  };
-
-  const handleTimeChange = (event) => {
-    setSelectedTime(event.target.value);
-  };
-
-  const handleStatusChange = (event) => {
-    setSelectedStatus(event.target.value);
-  };
-
-  const handlePriorityChange = (event) => {
-    setSelectedPriority(event.target.value);
-  };
-
-  
-
-  const handleTaskSubmit = () => {
-    if (textInput.trim() === "" || selectedTime === "") {
-      return;
-    }
-    const newTask = {
-      id: tasks.length + 1,
-      text: textInput,
-      group: selectedGroup,
-      time: selectedTime,
-      status: selectedStatus,
-      priority: selectedPriority
-    };
-
-    setTasks([...tasks, newTask]);
-    setTextInput("");
-    setSelectedTime("");
-  };
 
   const handleDeleteTask = (taskId) => {
     setTasks(tasks.filter((task) => task.id !== taskId));
-  };
-
-  const handleEditTask = (task) => {
-    const newTaskText = prompt("Edit task:", task.text);
-    if (newTaskText !== null && newTaskText !== task.text) {
-      const updatedTasks = tasks.map(t => {
-        if (t.id === task.id) {
-          return { ...t, text: newTaskText };
-        }
-        return t;
-      });
-      setTasks(updatedTasks);
-    }
   };
 
   const handlers = useSwipeable({
@@ -93,7 +35,10 @@ const TaskCalendar = (props) => {
                 <p>❗ {task.priority} Priority</p>
               </div>
               <div className="task-cal-actions">
-                <button className="calendar-button" onClick={() => handleEditTask(task)}>Edit</button>
+                <button className="calendar-button" onClick={() =>{
+                  props.setSelectedTask(task);
+                  props.setOpenModal(true);
+                }}>Edit</button>
                 <button className="calendar-button" onClick={() => handleDeleteTask(task.id)}>Delete</button>
               </div>
             </div>
