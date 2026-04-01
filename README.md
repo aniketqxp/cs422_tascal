@@ -75,7 +75,3 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 - Hat tip to anyone whose code was used as inspiration.
 - Thanks to the React and open-source community for their amazing work.
-
----
-
-Feel free to customize this README according to your project's needs. Good luck with your React Task Management app! If you have any questions or need further assistance, don't hesitate to reach out.
